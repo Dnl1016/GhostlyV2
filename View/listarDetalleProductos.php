@@ -22,6 +22,8 @@
     <link href="../Layout/css/fons.googleapis.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="../Layout/css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="../Lib/css/datatables.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -46,7 +48,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table id="listarRegistros" style="width:100%" class="table table-hover display">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -93,5 +95,9 @@
     <script src="../Layout/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="../Layout/js/sb-admin-2.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="../Lib/js/datatables.min.js"></script>
+    <script src="js/datatables.js"></script>  
 </body>
 </html>
