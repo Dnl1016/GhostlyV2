@@ -3,8 +3,6 @@
     if (!isset($_SESSION['usuario'])) {
         header('Location:../View/login.php');
     }
-    require_once('../Controller/controladorProductos.php');
-    $listaCategorias = $controladorProductos->listarCategorias();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,13 +37,13 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h1>Crear producto</h1>
-                                <a href="../Controller/controladorProductos.php?listarProductos" style="height: 50%;" class="btn btn-dark">Regresar</a>
+                                <h1>Crear rol</h1>
+                                <a href="../Controller/controladorRoles.php?listarRoles" style="height: 50%;" class="btn btn-dark">Regresar</a>
                             </div>
                         </div>
                         <div class="card-body">
                             <div id="error"></div>
-                            <form action="../Controller/controladorProductos.php" method="POST">
+                            <form action="../Controller/controladorRoles.php" method="POST">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -54,47 +52,12 @@
                                         </div> 
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="estado">Estado:</label>
-                                            <select required id="estado" name="estado" class="form-control">
-                                                <option value="">Seleccione el estado</option>
-                                                <option value="1">Activo</option>
-                                                <option value="0">Inactivo</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="genero">Genero:</label>
-                                            <select id="genero" name="genero" class="form-control">
-                                                <option value="">Seleccione el genero</option>
-                                                <option value="M">Masculino</option>
-                                                <option value="F">Femenino</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="idCategoria">Categoria:</label>
-                                            <select required class="form-control" name="idCategoria" id="idCategoria">
-                                                <option value="">Seleccion la categoria</option>
-                                                <?php foreach($listaCategorias as $categoria){ ?>
-                                                    <option value="<?php echo $categoria['idCategoria'] ?>"><?php echo $categoria['nombre'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input name="registrarProducto" type="submit" class="btn btn-dark col-md-12" value="Registrar">
+                                        <input name="registrarRoles" type="submit" class="btn btn-dark col-md-12" value="Registrar">
                                         <hr>
-                                        <a href="../Controller/controladorProductos.php?listarProductos" class="btn btn-secondary col-md-12">Cancelar</a>
+                                        <a href="../Controller/controladorRoles.php?listarRoles" class="btn btn-secondary col-md-12">Cancelar</a>
                                     </div>
                                 </div>
                             </form>

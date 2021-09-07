@@ -23,7 +23,12 @@ class controladorProductos{
         return $crudProductos->buscarProducto($idProducto);
     }
 
-    public function registrarProducto($nombre, $cantidad, $genero, $idCategoria, $estado)
+    public function buscarDetalleProducto($idDetalleProducto){
+        $crudProductos = new crudProductos();
+        return $crudProductos->buscarDetalleProducto($idDetalleProducto);
+    }
+
+    public function registrarProducto($nombre, $genero, $idCategoria, $estado)
     {
         $producto = new productos();
         date_default_timezone_set('America/Bogota');
@@ -32,19 +37,17 @@ class controladorProductos{
         $producto->setEstado($estado);
         $producto->setGenero($genero);
         $producto->setIdCategoria($idCategoria);
-        $producto->setCantidad($cantidad);
         $crudProductos = new crudProductos(); //Creamos el objeto del modelo para el registro
         return $crudProductos->registrarProducto($producto); //Enviamos el objeto al modelo
     }
 
-    public function editarProducto($idProducto, $nombre, $cantidad, $genero, $idCategoria, $estado)
+    public function editarProducto($idProducto, $nombre, $genero, $idCategoria, $estado)
     {
         $producto = new productos();
         $producto->setNombre($nombre);
         $producto->setEstado($estado);
         $producto->setGenero($genero);
         $producto->setIdCategoria($idCategoria);
-        $producto->setCantidad($cantidad);
         $crudProductos = new crudProductos(); //Creamos el objeto del modelo para el registro
         return $crudProductos->editarProducto($producto, $idProducto); //Enviamos el objeto al modelo
     }
@@ -52,6 +55,15 @@ class controladorProductos{
     public function detalleProducto($idProducto){
         $crudProductos = new crudProductos();
         return $crudProductos->detalleProducto($idProducto);
+    }
+
+    public function registrarDetalleProducto($idProducto, $nombre, $idTalla, $idColor){
+        $crudProductos = new crudProductos();
+        return $crudProductos->registrarDetalleProducto($idProducto, $nombre, $idTalla, $idColor);
+    }
+    public function editarDetalleProducto($idDetalleProducto, $nombre, $idTalla, $idColor){
+        $crudProductos = new crudProductos();
+        return $crudProductos->editarDetalleProducto($idDetalleProducto, $nombre, $idTalla, $idColor);
     }
 }
     
@@ -63,10 +75,10 @@ if(isset($_GET['registrarProducto'])){
     header('Location: ../View/crearProducto.php');
 }
 if (isset($_POST['registrarProducto'])) {
-    if(trim($_POST['nombre']) == '' || trim($_POST['cantidad']) == '' || trim($_POST['genero']) == '' || trim($_POST['idCategoria']) == '' || trim($_POST['estado']) == ''){
+    if(trim($_POST['nombre']) == '' || trim($_POST['genero']) == '' || trim($_POST['idCategoria']) == '' || trim($_POST['estado']) == ''){
         header('Location:../View/crearProducto.php?error=Ocurrio-un-error,-el-nombre-no-se-ingreso.');
     }   
-    $respuesta = $controladorProductos->registrarProducto($_POST['nombre'], $_POST['cantidad'], $_POST['genero'], $_POST['idCategoria'], $_POST['estado']);
+    $respuesta = $controladorProductos->registrarProducto($_POST['nombre'], $_POST['genero'], $_POST['idCategoria'], $_POST['estado']);
     if($respuesta == "Se creo con éxito"){
         header('Location:../View/listarProductos.php');
     }else{
@@ -79,10 +91,10 @@ if (isset($_GET['editarProducto'])) {
 if (isset($_POST['editarProducto'])) {
     if($_POST['idProducto'] == null){
         header('Location:../View/listarProductos.php?error=No-se-encontro-el-producto');
-    }else if(trim($_POST['nombre']) == '' || trim($_POST['cantidad']) == '' || trim($_POST['genero']) == '' || trim($_POST['idCategoria']) == '' || trim($_POST['estado']) == ''){
+    }else if(trim($_POST['nombre']) == '' || trim($_POST['genero']) == '' || trim($_POST['idCategoria']) == '' || trim($_POST['estado']) == ''){
         header('Location:../View/editarProducto.php?idProducto='.$_POST['idProducto'].'&error=Ocurrio-un-error,-el-nombre-no-se-ingreso.');
     } 
-    $respuesta = $controladorProductos->editarProducto($_POST['idProducto'], $_POST['nombre'], $_POST['cantidad'], $_POST['genero'], $_POST['idCategoria'], $_POST['estado']);
+    $respuesta = $controladorProductos->editarProducto($_POST['idProducto'], $_POST['nombre'], $_POST['genero'], $_POST['idCategoria'], $_POST['estado']);
     if($respuesta == "Se edito con éxito"){
         header('Location:../View/listarProductos.php');
     }else{
@@ -91,5 +103,35 @@ if (isset($_POST['editarProducto'])) {
 }
 if(isset($_GET['producto'])){
     header('Location:../View/listarDetalleProductos.php?idProducto='.$_GET['producto']);
+}
+if(isset($_GET['registrarDetalleProducto'])){
+    header('Location:../View/crearDetalleProducto.php?idProducto='.$_GET['registrarDetalleProducto']);
+}
+if(isset($_POST['registrarDetalleProducto'])){
+    if($_POST['idProducto'] == null && $_POST['nombre'] == null || $_POST['idTalla'] == null || $_POST['idColor'] == null){
+        header('Location:../View/crearDetalleProducto.php?error=Ocurrio-un-error');
+    }
+
+    $mensaje = $controladorProductos->registrarDetalleProducto($_POST['idProducto'], $_POST['nombre'], $_POST['idTalla'], $_POST['idColor']);
+
+    if($mensaje == "Se creo con éxito"){
+        header('Location:../View/listarDetalleProductos.php?idProducto='.$_POST['idProducto']);
+    }else{
+        header('Location:../View/crearDetalleProducto.php?error='.$mensaje);
+    }
+}
+if(isset($_GET['editarDetalleProducto'])){
+    header('Location:../View/editarDetalleProducto.php?idDetalleProducto='.$_GET['editarDetalleProducto']);
+}
+if(isset($_POST['editarDetalleProducto'])){
+    if(trim($_POST['idDetalleProducto']) == '' || trim($_POST['nombre']) == '' || trim($_POST['idTalla']) == '' || trim($_POST['idColor']) == ''){
+        header('Location:../View/editarDetalleProducto.php?idDetalleProducto='.$_POST['idDetalleProducto'].'&error=Ocurrio-un-error');
+    }
+    $mensaje = $controladorProductos->editarDetalleProducto($_POST['idDetalleProducto'], $_POST['nombre'], $_POST['idTalla'], $_POST['idColor']);
+    if($mensaje == "Se edito con éxito"){
+        header('Location:../View/listarDetalleProductos.php?idProducto='.$_POST['idProducto']);
+    }else{
+        header('Location:../View/editarDetalleProducto.php?idDetalleProducto='.$_GET['idDetalleProducto'].'&error='.$mensaje);
+    }
 }
 ?>

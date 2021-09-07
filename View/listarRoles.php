@@ -3,9 +3,8 @@
     if (!isset($_SESSION['usuario'])) {
         header('Location:../View/login.php');
     }
-    require_once('../Controller/controladorProductos.php');
-    $listaDetalleProductos = $controladorProductos->detalleProducto($_GET['idProducto']);
-    $producto = $controladorProductos->buscarProducto($_GET['idProducto']);
+    require_once('../Controller/controladorRoles.php');
+    $listarRoles = $controladorRol->listarRoles();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,42 +41,35 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h1>Detalles producto: <?php echo $producto['nombre'] ?></h1>
-                                <a href="../Controller/controladorProductos.php?registrarDetalleProducto=<?php echo $_GET['idProducto'] ?>" style="height: 50%;" class="btn btn-dark">Nuevo detalle producto</a>
+                                <h1>Lista de roles</h1>
+                                <a href="../Controller/controladorRoles.php?registrarRoles" style="height: 50%;" class="btn btn-dark">Nuevo Rol</a>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="listarRegistros" style="width:100%" class="table table-hover display">
+                                <table id="listarRegistros" style="width: 100%" class="table table-hover display">
                                     <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>Nombre</th>
-                                            <th>Cantidad</th>
+                                            <th>Estado</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php 
-                                            $contador = 0;
-                                            foreach($listaDetalleProductos as $detalleProducto){ 
-                                            $contador += 1;
-                                            ?>
+                                        <?php foreach($listarRoles as $Rol){ ?>
                                             <tr>
-                                                <td><?php echo $contador; ?></td>
-                                                <td><?php echo $detalleProducto['nombre']; ?></td>
-                                                <td><?php echo $detalleProducto['cantidad']; ?></td>
+                                                <td><?php echo $Rol['idRol']; ?></td>
+                                                <td><?php echo $Rol['nombre']; ?></td>
+                                                <td><?php echo $Rol['estado'] == 1 ? 'Activo' : 'Inactivo'; ?></td>
                                                 <td>
-                                                    <a href="../Controller/controladorProductos.php?editarDetalleProducto=<?php echo $detalleProducto['idDetalleProducto'] ?>" class="btn btn-secondary">Editar</a>
+                                                    <a href="../Controller/controladorRoles.php?editarRol=<?php echo $Rol['idRol'] ?>" class="btn btn-secondary">Editar</a>
                                                 </td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <a href="../Controller/controladorProductos.php?listarProductos" class="btn btn-dark col-md-12">Regresar</a>
                         </div>
                     </div>
                 </div>
@@ -102,7 +94,6 @@
     <script src="../Layout/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="../Layout/js/sb-admin-2.min.js"></script>
-
     <!-- Datatables -->
     <script src="../Lib/js/datatables.min.js"></script>
     <script src="js/datatables.js"></script>  
