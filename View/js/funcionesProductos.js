@@ -26,7 +26,3 @@ $(document).ready(function(){
 function eliminarDetalleProducto(contador){
     $('#tr-'+contador).remove();
 }
-
-function nuevaPruebaMerge(){
-    console.log("HOLSA");
-}
