@@ -1,28 +1,3 @@
-// $(document).ready(function(){
-//     $('#agregarEntrada').click(function(){
-//         let contador = 0;
-//         let cantidad = $('#cantidad').val();
-//         let idDetalleProducto = $('#idDetalleProducto option:selected').val();
-//         let producto = $('#idDetalleProducto option:selected').text();
-//         $('#cajaEntradas').append(`
-//             <tr id="tr-${contador}">
-//                 <input type="hidden" name="cantidad[]" value="${cantidad}">
-//                 <input type="hidden" name="idDetalleProducto[]" value="${idDetalleProducto}">
-//                 <th>${producto}</th>
-//                 <th>${cantidad}</th>
-//                 <th>
-//                     <button type="button" class="btn btn-danger" onclick="eliminarEntrada(${contador})">X</button>
-//                 </th>
-//             </tr>
-//         `);
-//         contador += 1;
-//     });
-// });
-
-// function eliminarEntrada(contador){
-//     $('#tr-'+contador).remove();
-// }
-
 let idArray = [];
 let cantidadArray = [];
 $(document).ready(function(){
