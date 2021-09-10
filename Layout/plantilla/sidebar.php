@@ -44,11 +44,12 @@
                         <a class="collapse-item" href="../Controller/controladorCategorias.php?listarCategorias">Categorias</a>
                         <a class="collapse-item" href="../Controller/controladorColores.php?listarColores">Colores</a>
                         <a class="collapse-item" href="../Controller/controladorTallas.php?listarTallas">Tallas</a>
+                        <a class="collapse-item" href="../Controller/controladorEntradas.php?listarEntradas">Entradas</a>
                     </div>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="#">
                     <i class="fas fa-money-bill-alt"></i>
                     <span>Ventas</span></a>
             </li>
