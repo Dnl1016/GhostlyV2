@@ -28,6 +28,9 @@ $(document).ready(function(){
                 </th>
             </tr>
         `);
+        $('#cantidad').val() = '';
+        $('#idDetalleProducto').val() = 0;
+        $('#idDetalleProducto').text() = "";
     });
 });
 

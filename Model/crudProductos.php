@@ -13,7 +13,7 @@
 
         public function listarCategorias(){
             $db = ConexionDB::Conectar(); //Conectamos con la base de datos
-            $sql = $db->query('SELECT idCategoria, nombre FROM categorias');//Consultamos la base de datos
+            $sql = $db->query('SELECT idCategoria, nombre FROM categorias WHERE estado=1');//Consultamos la base de datos
             $sql->execute();
             ConexionDB::CerrarConexion($db);
             return $sql->fetchAll();//Retornamos toda la informacion

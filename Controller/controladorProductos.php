@@ -32,7 +32,7 @@ class controladorProductos{
     {
         $producto = new productos();
         date_default_timezone_set('America/Bogota');
-        $producto->setFechaRegistro(date('d-m-Y'));
+        $producto->setFechaRegistro(date('Y-m-d')); 
         $producto->setNombre($nombre);
         $producto->setEstado($estado);
         $producto->setGenero($genero);
