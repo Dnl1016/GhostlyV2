@@ -3,10 +3,8 @@
     if (!isset($_SESSION['usuario'])) {
         header('Location:../View/login.php');
     }
-    require_once('../Controller/controladorTallas.php');
-    require_once('../Controller/controladorColores.php');
-    $listarTallas = $controladorTallas->listarTallas();
-    $listarColores = $controladorColores->listarColores();
+    require_once('../Controller/controladorVentas.php');
+    $listarPersonas = $controladorVentas->listarPersonas();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,71 +40,60 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h1>Crear detalle productos</h1>
-                                <a href="../Controller/controladorProductos.php?producto=<?php echo $_GET['idProducto'] ?>" style="height: 50%;" class="btn btn-dark">Regresar</a>
+                                <h1>Crear venta</h1>
+                                <a href="../Controller/controladorVentas.php?listarVentas" style="height: 50%;" class="btn btn-dark">Regresar</a>
                             </div>
                         </div>
                         <div class="card-body">
                             <div id="error"></div>
-                            <form action="../Controller/controladorProductos.php" method="POST">
-                                <input type="hidden" name="idProducto" value="<?php echo $_GET['idProducto'] ?>">
+                            <form action="../Controller/controladorVentas.php" method="POST">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="card border-dark mb-3">
                                             <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="nombre">Nombre:</label>
-                                                            <input required id="nombre" class="form-control" type="text" placeholder="Nombre...">
-                                                        </div> 
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="idTalla">Talla:</label>
-                                                            <select required class="form-control" id="idTalla">
-                                                                <option value="">Seleccione la talla</option>
-                                                                <?php foreach($listarTallas as $talla){ ?>
-                                                                    <option value="<?php echo $talla['idTalla'] ?>"><?php echo $talla['nombre'] ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">  
-                                                        <div class="form-group">
-                                                            <label for="idColor">Color:</label>
-                                                            <select required class="form-control" id="idColor">
-                                                                <option value="">Seleccione el color</option>
-                                                                <?php foreach($listarColores as $color){ ?>
-                                                                    <option value="<?php echo $color['idColor'] ?>"><?php echo $color['nombre'] ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                               <div class="card">
+                                                   <div class="card-header">
+                                                       <h2 class="text-center">Encabezado venta</h2>
+                                                       <hr>
+                                                       <div class="row">
+                                                           <div class="col-md-6">
+                                                               <div class="form-group">
+                                                                   <label for="idPersona">Persona: </label>
+                                                                   <select class="form-control" name="idPersona" id="idPersona">
+                                                                        <option value="">Seleccione la persona</option>
+                                                                        <?php foreach($listarPersonas as $persona) { ?>
+                                                                            <option value="<?php echo $persona['idPersona'] ?>"><?php echo $persona['nombre'] . ' ' . $persona['apellido'] . ' - ' . $persona['cedula'] . '.' ?></option>
+                                                                        <?php } ?>
+                                                                   </select>
+                                                               </div>
+                                                           </div>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                               <div class="card-body">
+                                               </div>
                                             </div>
                                             <div class="card-footer">
-                                                <button type="button" class="btn btn-dark col-md-12" id="agregarDetalleProducto"><i class="fas fa-plus"></i></button>
+                                                <button type="button" class="btn btn-dark col-md-12" id="agregarVenta"><i class="fas fa-plus"></i></button>
                                             </div>
                                         </div>
                                         <div class="card">
                                             <div class="card-header">
-                                                <h3 style="text-align: center; margin-top: 2px;">Detalle productos</h3>
+                                                <h3 style="text-align: center; margin-top: 2px;">Detalle venta</h3>
                                             </div>
                                             <div class="card-body">
                                                 <div class="table-responsive">
                                                     <table class="table table-hovered display" style="width: 100%;" id="listarRegistros">
                                                         <thead>
                                                             <tr>
-                                                                <th>Nombre</th>
-                                                                <th>Talla</th>
-                                                                <th>Color</th>
+                                                                <th>Nombre producto</th>
+                                                                <th>Cantidad</th>
+                                                                <th>Precio unitario</th>
+                                                                <th>Precio total</th>
                                                                 <th>Opciones</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody id="cajaDetalleProducto"></tbody>
+                                                        <tbody id="cajaVentas"></tbody>
                                                     </table>
                                                 </div>
                                             </div>
@@ -116,9 +103,9 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input name="registrarDetalleProducto" type="submit" class="btn btn-dark col-md-12" value="Guardar productos">
+                                        <input name="registrarVenta" type="submit" class="btn btn-dark col-md-12" value="Guardar venta">
                                         <hr>
-                                        <a href="../Controller/controladorProductos.php?producto=<?php echo $_GET['idProducto'] ?>" class="btn btn-secondary col-md-12">Cancelar</a>
+                                        <a href="../Controller/controladorVentas.php?listarVentas" class="btn btn-secondary col-md-12">Cancelar</a>
                                     </div>
                                 </div>
                             </form>
@@ -165,6 +152,6 @@
         }
     ?>
 
-    <script src="js/funcionesProductos.js"></script>
+    <script src="js/funcionesVentas.js"></script>
 </body>
 </html>

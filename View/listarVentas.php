@@ -3,8 +3,8 @@
     if (!isset($_SESSION['usuario'])) {
         header('Location:../View/login.php');
     }
-    require_once('../Controller/controladorEntradas.php');
-    $listaEntradas = $controladorEntradas->listarEntradas();
+    require_once('../Controller/controladorVentas.php');
+    $listarVentas = $controladorVentas->listarVentas();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,8 +41,8 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h1>Lista de entradas</h1>
-                                <a href="../Controller/controladorEntradas.php?registrarEntradas" style="height: 50%;" class="btn btn-dark">Nueva entrada</a>
+                                <h1>Lista de ventas</h1>
+                                <a href="../Controller/controladorVentas.php?registrarVentas" style="height: 50%;" class="btn btn-dark">Nueva venta</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -51,18 +51,22 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Nombre producto</th>
-                                            <th>Cantidad</th>
-                                            <th>Fecha</th>
+                                            <th>Nombre</th>
+                                            <th>Fecha venta</th>
+                                            <th>Valor</th>
+                                            <th>Estado</th>
+                                            <th>Persona</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($listaEntradas as $entrada){ ?>
+                                        <?php foreach($listarVentas as $venta){ ?>
                                             <tr>
-                                                <td><?php echo $entrada['idEntrada']; ?></td>
-                                                <td><?php echo $entrada['nombre']; ?></td>
-                                                <td><?php echo $entrada['cantidad']; ?></td>
-                                                <td><?php echo $entrada['fechaEntrada']; ?></td>
+                                                <td><?php echo $venta['idVenta']; ?></td>
+                                                <td><?php echo $venta['nombre']; ?></td>
+                                                <td><?php echo $venta['fechaVenta']; ?></td>
+                                                <td><?php echo $venta['valor']; ?></td>
+                                                <td><?php echo $venta['estado'] == 0 ? 'Por aprobrar' : ($venta['estado'] == 1 ? 'Aprobada' : 'Anulada'); ?></td>
+                                                <td><?php echo $venta['idPersona']; ?></td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>

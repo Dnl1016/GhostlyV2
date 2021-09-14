@@ -21,6 +21,7 @@
     <link href="../Layout/css/fons.googleapis.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="../Layout/css/sb-admin-2.min.css" rel="stylesheet">
+    <?php include('../Layout/plantilla/select2Css.html') ?>
 </head>
 
 <body id="page-top">
@@ -167,6 +168,8 @@
     <!-- Custom scripts for all pages-->
     <script src="../Layout/js/sb-admin-2.min.js"></script>
 
+    <?php include('../Layout/plantilla/select2Js.html') ?>                                                
+    
     <?php
         if(isset($_GET['error'])){
             $error = $_GET['error'];

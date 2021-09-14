@@ -49,7 +49,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="../Controller/controladorVentas.php?listarVentas">
                     <i class="fas fa-money-bill-alt"></i>
                     <span>Ventas</span></a>
             </li>

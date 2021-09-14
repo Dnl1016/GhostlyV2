@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-09-2021 a las 18:45:06
--- Versión del servidor: 10.4.19-MariaDB
--- Versión de PHP: 8.0.7
+-- Tiempo de generación: 14-09-2021 a las 14:58:41
+-- Versión del servidor: 10.4.18-MariaDB
+-- Versión de PHP: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -218,6 +218,21 @@ INSERT INTO `usuarios` (`idUsuario`, `usuario`, `contrasena`, `estado`, `idPerso
 (6, 'asdrual1107', '6fead90aa061349b9874d904c108b59c79d12d76', 1, 2, 1),
 (7, 'administrador', '6fead90aa061349b9874d904c108b59c79d12d76', 1, 3, 1);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas`
+--
+
+CREATE TABLE `ventas` (
+  `idVenta` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `fechaVenta` date NOT NULL,
+  `valor` float NOT NULL,
+  `estado` tinyint(1) NOT NULL,
+  `idPersona` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Índices para tablas volcadas
 --
@@ -226,19 +241,22 @@ INSERT INTO `usuarios` (`idUsuario`, `usuario`, `contrasena`, `estado`, `idPerso
 -- Indices de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  ADD PRIMARY KEY (`idCategoria`);
+  ADD PRIMARY KEY (`idCategoria`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `colores`
 --
 ALTER TABLE `colores`
-  ADD PRIMARY KEY (`idColor`);
+  ADD PRIMARY KEY (`idColor`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `detalleproductos`
 --
 ALTER TABLE `detalleproductos`
   ADD PRIMARY KEY (`idDetalleProducto`),
+  ADD UNIQUE KEY `nombre` (`nombre`),
   ADD KEY `idTalla` (`idTalla`),
   ADD KEY `idColor` (`idColor`),
   ADD KEY `idProducto` (`idProducto`);
@@ -263,19 +281,22 @@ ALTER TABLE `personas`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`idProducto`),
-  ADD UNIQUE KEY `idCategoria` (`idCategoria`);
+  ADD UNIQUE KEY `idCategoria` (`idCategoria`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
-  ADD PRIMARY KEY (`idRol`);
+  ADD PRIMARY KEY (`idRol`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `tallas`
 --
 ALTER TABLE `tallas`
-  ADD PRIMARY KEY (`idTalla`);
+  ADD PRIMARY KEY (`idTalla`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -284,6 +305,13 @@ ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`idUsuario`),
   ADD UNIQUE KEY `usuario` (`usuario`),
   ADD KEY `idRol` (`idRol`),
+  ADD KEY `idPersona` (`idPersona`);
+
+--
+-- Indices de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD PRIMARY KEY (`idVenta`),
   ADD KEY `idPersona` (`idPersona`);
 
 --
@@ -345,6 +373,12 @@ ALTER TABLE `usuarios`
   MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  MODIFY `idVenta` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -374,6 +408,12 @@ ALTER TABLE `productos`
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`idPersona`) REFERENCES `personas` (`idPersona`),
   ADD CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`idRol`) REFERENCES `roles` (`idRol`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`idPersona`) REFERENCES `personas` (`idPersona`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

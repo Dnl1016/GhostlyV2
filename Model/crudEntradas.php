@@ -4,7 +4,7 @@
 
         public function listarEntradas(){
             $db = ConexionDB::Conectar();
-            $sql = $db->query("SELECT * FROM entradas");
+            $sql = $db->query("SELECT e.idEntrada, e.cantidad, e.fechaEntrada, dp.nombre FROM entradas e JOIN detalleproductos dp ON e.idDetalleProducto=dp.idDetalleProducto");
             $sql->execute();
             ConexionDB::CerrarConexion($db);
             return $sql->fetchAll();
