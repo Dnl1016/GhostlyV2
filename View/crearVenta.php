@@ -5,6 +5,7 @@
     }
     require_once('../Controller/controladorVentas.php');
     $listarPersonas = $controladorVentas->listarPersonas();
+    $listarProductos = $controladorVentas->listarProductos();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,10 +68,47 @@
                                                                    </select>
                                                                </div>
                                                            </div>
+                                                           <div class="col-md-6">
+                                                               <div class="form-group">
+                                                                   <label for="nombreVenta">Nombre venta: </label>
+                                                                   <input type="text" id="nombreVenta" name="nombreVenta" class="form-control" placeholder="Nombre de la venta...">
+                                                               </div>
+                                                           </div>
                                                        </div>
                                                    </div>
                                                </div>
                                                <div class="card-body">
+                                                   <div class="row">
+                                                       <div class="col-md-12">
+                                                           <div class="form-group">
+                                                               <label for="idDetalleProducto">Producto:</label>
+                                                               <select onchange="consultarPrecio(this.value)" class="form-control" name="idDetalleProducto" id="idDetalleProducto">
+                                                                   <option value="">Seleccione el producto a vender</option>
+                                                                   <?php foreach($listarProductos as $producto) { ?>
+                                                                        <option value="<?php echo $producto['idDetalleProducto'] ?>"><?php echo $producto['nombre'] ?></option>
+                                                                   <?php } ?>
+                                                               </select>
+                                                           </div>   
+                                                       </div>
+                                                       <div class="col-md-4">
+                                                            <div class="form-group">
+                                                               <label for="cantidad">Cantidad:</label>
+                                                               <input type="text" name="cantidad" id="cantidad" class="form-control" placeholder="Ingrese la cantidad a comprar...">
+                                                           </div> 
+                                                       </div>
+                                                       <div class="col-md-4">
+                                                            <div class="form-group">
+                                                               <label for="precioUnitario">Precio unitario:</label>
+                                                               <input readonly type="text" id="precioUnitario" class="form-control">
+                                                           </div> 
+                                                       </div>
+                                                       <div class="col-md-4">
+                                                            <div class="form-group">
+                                                               <label for="precioTotal">Precio total:</label>
+                                                               <input readonly type="text" id="precioTotal" class="form-control">
+                                                           </div> 
+                                                       </div>
+                                                   </div>
                                                </div>
                                             </div>
                                             <div class="card-footer">
@@ -94,6 +132,15 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody id="cajaVentas"></tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th colspan="3"></th>
+                                                                <th>Precio total: </th>
+                                                                <th> 
+                                                                    <input readonly type="text" id="precioTotalVenta" value="0" class="form-control">
+                                                                </th>
+                                                            </tr>
+                                                        </tfoot>
                                                     </table>
                                                 </div>
                                             </div>

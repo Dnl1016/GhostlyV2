@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-09-2021 a las 14:58:41
--- Versión del servidor: 10.4.18-MariaDB
--- Versión de PHP: 8.0.3
+-- Tiempo de generación: 18-09-2021 a las 18:12:29
+-- Versión del servidor: 10.4.19-MariaDB
+-- Versión de PHP: 8.0.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -84,6 +84,20 @@ CREATE TABLE `detalleproductos` (
 INSERT INTO `detalleproductos` (`idDetalleProducto`, `nombre`, `cantidad`, `imagenUno`, `imagenDos`, `imagenTres`, `idTalla`, `idColor`, `idProducto`) VALUES
 (5, 'Zapatos Adidas Rojos', 330, 'ImagenUno_Zapatos Adidas Rojos', 'ImagenDos_Zapatos Adidas Rojos', 'ImagenTres_Zapatos Adidas Rojos', 1, 1, 6),
 (6, 'Zapatos Adidas Rojos 2', 70, 'ImagenUno_Zapatos Adidas Rojos 2', 'ImagenDos_Zapatos Adidas Rojos 2', 'ImagenTres_Zapatos Adidas Rojos 2', 1, 1, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalleventa`
+--
+
+CREATE TABLE `detalleventa` (
+  `idDetalleVenta` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precio` float NOT NULL,
+  `idVenta` int(11) NOT NULL,
+  `idDetalleProducto` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -262,6 +276,14 @@ ALTER TABLE `detalleproductos`
   ADD KEY `idProducto` (`idProducto`);
 
 --
+-- Indices de la tabla `detalleventa`
+--
+ALTER TABLE `detalleventa`
+  ADD PRIMARY KEY (`idDetalleVenta`),
+  ADD KEY `idVenta` (`idVenta`),
+  ADD KEY `idDetalleProducto` (`idDetalleProducto`);
+
+--
 -- Indices de la tabla `entradas`
 --
 ALTER TABLE `entradas`
@@ -337,6 +359,12 @@ ALTER TABLE `detalleproductos`
   MODIFY `idDetalleProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de la tabla `detalleventa`
+--
+ALTER TABLE `detalleventa`
+  MODIFY `idDetalleVenta` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `entradas`
 --
 ALTER TABLE `entradas`
@@ -389,6 +417,13 @@ ALTER TABLE `detalleproductos`
   ADD CONSTRAINT `detalleproductos_ibfk_1` FOREIGN KEY (`idTalla`) REFERENCES `tallas` (`idTalla`) ON UPDATE CASCADE,
   ADD CONSTRAINT `detalleproductos_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`) ON UPDATE CASCADE,
   ADD CONSTRAINT `detalleproductos_ibfk_3` FOREIGN KEY (`idColor`) REFERENCES `colores` (`idColor`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `detalleventa`
+--
+ALTER TABLE `detalleventa`
+  ADD CONSTRAINT `detalleventa_ibfk_1` FOREIGN KEY (`idVenta`) REFERENCES `ventas` (`idVenta`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `detalleventa_ibfk_2` FOREIGN KEY (`idDetalleProducto`) REFERENCES `detalleproductos` (`idDetalleProducto`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `entradas`

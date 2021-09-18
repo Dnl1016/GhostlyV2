@@ -65,7 +65,7 @@
                                                 <td><?php echo $venta['nombre']; ?></td>
                                                 <td><?php echo $venta['fechaVenta']; ?></td>
                                                 <td><?php echo $venta['valor']; ?></td>
-                                                <td><?php echo $venta['estado'] == 0 ? 'Por aprobrar' : ($venta['estado'] == 1 ? 'Aprobada' : 'Anulada'); ?></td>
+                                                <td><?php echo $venta['estado'] == 0 ? 'Registrada' : ($venta['estado'] == 1 ? 'Aprobada' : 'Anulada'); ?></td>
                                                 <td><?php echo $venta['idPersona']; ?></td>
                                             </tr>
                                         <?php } ?>

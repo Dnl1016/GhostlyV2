@@ -1,42 +1,68 @@
-let idArray = [];
-let cantidadArray = [];
-$(document).ready(function(){
-    $('#agregarEntrada').click(function(){
-        let cantidad = parseInt($('#cantidad').val());
-        let idDetalleProducto = parseInt($('#idDetalleProducto option:selected').val());
-        let producto = $('#idDetalleProducto option:selected').text();
-        if(idArray.includes(idDetalleProducto)){
-            $(`#tr-${idDetalleProducto}`).remove();
-            let indice = idArray.indexOf(idDetalleProducto);
-            cantidad += parseInt(cantidadArray[indice]);
-            cantidadArray.splice(indice, 1);
-            idArray.splice(indice, 1);
-            cantidadArray.push(cantidad);
-            idArray.push(idDetalleProducto);
-        }else{
-            idArray.push(idDetalleProducto);
-            cantidadArray.push(cantidad);
-        }
-        $('#cajaEntradas').append(`
-            <tr id="tr-${idDetalleProducto}">
-                <input type="hidden" name="cantidad[]" value="${cantidad}">
-                <input type="hidden" name="idDetalleProducto[]" value="${idDetalleProducto}">
-                <th>${producto}</th>
-                <th>${cantidad}</th>
-                <th>
-                    <button type="button" class="btn btn-danger" onclick="eliminarEntrada(${idDetalleProducto})">X</button>
-                </th>
-            </tr>
-        `);
-        $('#cantidad').val() = '';
-        $('#idDetalleProducto').val() = 0;
-        $('#idDetalleProducto').text() = "";
-    });
+function consultarPrecio(idProducto) {
+    $("#precioUnitario").val("");
+    $("#precioUnitarioOculto").val("");
+    $("#precioTotal").val("");
+    $("#cantidad").val("");
+    if (idProducto != "") {
+        let form = new FormData();
+        form.append("idProducto", idProducto);
+        form.append("consultarPrecio", "");
+        $.ajax({
+            url: "../Controller/controladorVentas.php", //Consultamos el controlador
+            type: "post",
+            data: form,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                $("#precioUnitario").val(response);
+            },
+        });
+    }
+}
+
+$("#cantidad").keyup(function () {
+    $("#precioTotal").val(
+        $("#cantidad").val() * $("#precioUnitario").val()
+    );
 });
 
-function eliminarEntrada(idDetalleProducto){
-    let indice = idArray.indexOf(idDetalleProducto);
-    cantidadArray.splice(indice, 1);
-    idArray.splice(indice, 1);
-    $('#tr-'+idDetalleProducto).remove();
+$("#cantidad").keypress(function () {
+    $("#precioTotal").val(
+        $("#cantidad").val() * $("#precioUnitario").val()
+    );
+});
+
+let arrayIdProducto = [];
+let arrayCantidad = [];
+let arrayPrecioUnitario = [];
+$('#agregarVenta').click(function(){
+    let idProducto = $('#idDetalleProducto option:selected').val();
+    let nombreProducto = $('#idDetalleProducto option:selected').text();
+    let cantidad = $('#cantidad').val();
+    let precioUnitario = $('#precioUnitario').val();
+    let precioTotal = $('#precioTotal').val();
+
+    $('#cajaVentas').append(`
+        <tr id="tr-${idProducto}">
+            <input type="hidden" name="detalleIdProducto[]" value="${idProducto}">
+            <input type="hidden" name="detalleCantidad[]" value="${cantidad}">
+            <input type="hidden" name="detallePrecioUnitario[]" value="${precioUnitario}">
+            <td>${nombreProducto}</td>
+            <td>${cantidad}</td>
+            <td>${precioUnitario}</td>
+            <td>${precioTotal}</td>
+            <td>
+                <button type="button" onclick="eliminarDetalleVenta(${idProducto}, ${precioTotal})" class="btn btn-danger">X</button>
+            </td>
+        </tr>
+    `);
+
+    let precioTotalVenta = $('#precioTotalVenta').val() || 0;
+    $('#precioTotalVenta').val(parseInt(precioTotalVenta) + parseInt(precioTotal));
+}); 
+
+function eliminarDetalleVenta(idProducto, subtotal){
+    $('#tr-'+idProducto).remove();
+    let precioTotalVenta = $('#precioTotalVenta').val() || 0;
+    $('#precioTotalVenta').val(parseInt(precioTotalVenta) - parseInt(subtotal));
 }
