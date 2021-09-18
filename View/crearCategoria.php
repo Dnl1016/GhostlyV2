@@ -37,7 +37,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h1>Crear categoria</h1>
+                                <h1>Crear categoría</h1>
                                 <a href="../Controller/controladorCategorias.php?listarCategorias" style="height: 50%;" class="btn btn-dark">Regresar</a>
                             </div>
                         </div>

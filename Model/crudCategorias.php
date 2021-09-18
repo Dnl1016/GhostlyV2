@@ -14,8 +14,8 @@
             $mensaje = '';
             $Db = ConexionDB::Conectar();
             $sql = $Db->prepare('INSERT INTO categorias(nombre, estado)
-            VALUES (:nombre, :estado)');
-            $sql->bindvalue('nombre',$categoria->getNombre());
+            VALUES (:usuario, :estado)');
+            $sql->bindvalue('usuario',$categoria->getNombre());
             $sql->bindvalue('estado',$categoria->getEstado());
             try {
                 $sql->execute(); //Ejecutamos la consulta

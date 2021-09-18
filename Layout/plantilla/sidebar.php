@@ -21,12 +21,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Configuracion</span>
+                    <span>Configuración</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="../Controller/controladorRoles.php?listarRoles">Roles</a>
                     </div>
@@ -41,14 +41,15 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="../Controller/controladorProductos.php?listarProductos">Productos</a>
-                        <a class="collapse-item" href="../Controller/controladorCategorias.php?listarCategorias">Categorias</a>
+                        <a class="collapse-item" href="../Controller/controladorCategorias.php?listarCategorias">Categorías</a>
                         <a class="collapse-item" href="../Controller/controladorColores.php?listarColores">Colores</a>
                         <a class="collapse-item" href="../Controller/controladorTallas.php?listarTallas">Tallas</a>
+                        <a class="collapse-item" href="../Controller/controladorEntradas.php?listarEntradas">Entradas</a>
                     </div>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="../Controller/controladorVentas.php?listarVentas">
                     <i class="fas fa-money-bill-alt"></i>
                     <span>Ventas</span></a>
             </li>

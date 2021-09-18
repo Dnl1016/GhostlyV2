@@ -26,6 +26,7 @@
     <link href="../Layout/css/fons.googleapis.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="../Layout/css/sb-admin-2.min.css" rel="stylesheet">
+    <?php include('../Layout/plantilla/select2Css.html') ?>
 </head>
 
 <body id="page-top">
@@ -44,7 +45,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h1>Editar categoria</h1>
+                                <h1>Editar categoría</h1>
                                 <a href="../Controller/controladorCategorias.php?listarCategorias" style="height: 50%;" class="btn btn-dark">Regresar</a>
                             </div>
                         </div>
@@ -103,6 +104,8 @@
     <script src="../Layout/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="../Layout/js/sb-admin-2.min.js"></script>
+
+    <?php include('../Layout/plantilla/select2Js.html') ?>
 
     <?php
         if(isset($_GET['error'])){

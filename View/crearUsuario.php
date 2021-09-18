@@ -21,6 +21,7 @@
     <link href="../Layout/css/fons.googleapis.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="../Layout/css/sb-admin-2.min.css" rel="stylesheet">
+    <?php include('../Layout/plantilla/select2Css.html') ?>
 </head>
 
 <body id="page-top">
@@ -77,8 +78,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="telefono">Telefono:</label>
-                                            <input required id="telefono" name="telefono" class="form-control" type="text" placeholder="Telefono...">
+                                            <label for="telefono">Teléfono:</label>
+                                            <input required id="telefono" name="telefono" class="form-control" type="text" placeholder="Teléfono...">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -95,7 +96,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="direccion">Direccion:</label>
+                                            <label for="direccion">Dirección:</label>
                                             <input required id="direccion" name="direccion" class="form-control" type="text" placeholder="Dirección...">
                                         </div>
                                     </div>
@@ -167,6 +168,8 @@
     <!-- Custom scripts for all pages-->
     <script src="../Layout/js/sb-admin-2.min.js"></script>
 
+    <?php include('../Layout/plantilla/select2Js.html') ?>                                                
+    
     <?php
         if(isset($_GET['error'])){
             $error = $_GET['error'];

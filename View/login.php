@@ -21,7 +21,7 @@
     <link href="../Layout/css/sb-admin-2.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-dark">
     <div class="container">
         <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -43,14 +43,14 @@
                                         <div class="form-group">
                                             <input name="contrasena" type="password" class="form-control form-control-user" placeholder="Contraseña...">
                                         </div>
-                                        <input type="submit" name="validarAcceso" class="btn btn-primary btn-user btn-block" value="Iniciar sesión">
+                                        <input type="submit" name="validarAcceso" class="btn btn-dark btn-user btn-block" value="Iniciar sesión">
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="#">Olvidaste tu contraseña?</a>
+                                        <a class="small" href="olvidarContraseña.php">Olvidaste tu contraseña?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="#">Crear una cuenta!</a>
+                                        <a class="small" href="registrar.php">Crear una cuenta!</a>
                                     </div>
                                 </div>
                             </div>

@@ -3,8 +3,8 @@
     if (!isset($_SESSION['usuario'])) {
         header('Location:../View/login.php');
     }
-    require_once('../Controller/controladorTallas.php');
-    $listaTallas = $controladorTallas->listarTallas();
+    require_once('../Controller/controladorVentas.php');
+    $listarVentas = $controladorVentas->listarVentas();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,8 +41,8 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h1>Lista de tallas</h1>
-                                <a href="../Controller/controladorTallas.php?registrarTalla" style="height: 50%;" class="btn btn-dark">Nueva talla</a>
+                                <h1>Lista de ventas</h1>
+                                <a href="../Controller/controladorVentas.php?registrarVentas" style="height: 50%;" class="btn btn-dark">Nueva venta</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -52,17 +52,21 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Nombre</th>
-                                            <th>Opciones</th>
+                                            <th>Fecha venta</th>
+                                            <th>Valor</th>
+                                            <th>Estado</th>
+                                            <th>Persona</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($listaTallas as $talla){ ?>
+                                        <?php foreach($listarVentas as $venta){ ?>
                                             <tr>
-                                                <td><?php echo $talla['idTalla']; ?></td>
-                                                <td><?php echo $talla['nombre']; ?></td>
-                                                <td>
-                                                    <a href="../Controller/controladorTallas.php?editarTalla=<?php echo $talla['idTalla'] ?>" class="btn btn-secondary">Editar</a>
-                                                </td>
+                                                <td><?php echo $venta['idVenta']; ?></td>
+                                                <td><?php echo $venta['nombre']; ?></td>
+                                                <td><?php echo $venta['fechaVenta']; ?></td>
+                                                <td><?php echo $venta['valor']; ?></td>
+                                                <td><?php echo $venta['estado'] == 0 ? 'Por aprobrar' : ($venta['estado'] == 1 ? 'Aprobada' : 'Anulada'); ?></td>
+                                                <td><?php echo $venta['idPersona']; ?></td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-08-2021 a las 18:42:37
+-- Tiempo de generación: 14-09-2021 a las 14:58:41
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -38,7 +38,8 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`idCategoria`, `nombre`, `estado`) VALUES
-(1, 'Pantalones', 0);
+(1, 'Pantalones', 1),
+(2, 'Zapatos', 1);
 
 -- --------------------------------------------------------
 
@@ -75,6 +76,38 @@ CREATE TABLE `detalleproductos` (
   `idColor` int(10) NOT NULL,
   `idProducto` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `detalleproductos`
+--
+
+INSERT INTO `detalleproductos` (`idDetalleProducto`, `nombre`, `cantidad`, `imagenUno`, `imagenDos`, `imagenTres`, `idTalla`, `idColor`, `idProducto`) VALUES
+(5, 'Zapatos Adidas Rojos', 330, 'ImagenUno_Zapatos Adidas Rojos', 'ImagenDos_Zapatos Adidas Rojos', 'ImagenTres_Zapatos Adidas Rojos', 1, 1, 6),
+(6, 'Zapatos Adidas Rojos 2', 70, 'ImagenUno_Zapatos Adidas Rojos 2', 'ImagenDos_Zapatos Adidas Rojos 2', 'ImagenTres_Zapatos Adidas Rojos 2', 1, 1, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `entradas`
+--
+
+CREATE TABLE `entradas` (
+  `idEntrada` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `fechaEntrada` datetime NOT NULL,
+  `idDetalleProducto` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `entradas`
+--
+
+INSERT INTO `entradas` (`idEntrada`, `cantidad`, `fechaEntrada`, `idDetalleProducto`) VALUES
+(14, 10, '2021-09-10 11:09:14', 5),
+(15, 20, '2021-09-10 11:09:31', 6),
+(16, 20, '2021-09-10 11:09:50', 5),
+(17, 50, '2021-09-10 11:09:19', 6),
+(18, 300, '2021-09-10 11:09:19', 5);
 
 -- --------------------------------------------------------
 
@@ -122,7 +155,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`idProducto`, `nombre`, `cantidad`, `estado`, `genero`, `fechaRegistro`, `idCategoria`) VALUES
-(1, 'Producto', 2, 1, 'F', '0000-00-00', 1);
+(6, 'Zapatos Adidas', 400, 1, 'M', '2021-09-10', 2);
 
 -- --------------------------------------------------------
 
@@ -185,6 +218,21 @@ INSERT INTO `usuarios` (`idUsuario`, `usuario`, `contrasena`, `estado`, `idPerso
 (6, 'asdrual1107', '6fead90aa061349b9874d904c108b59c79d12d76', 1, 2, 1),
 (7, 'administrador', '6fead90aa061349b9874d904c108b59c79d12d76', 1, 3, 1);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas`
+--
+
+CREATE TABLE `ventas` (
+  `idVenta` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `fechaVenta` date NOT NULL,
+  `valor` float NOT NULL,
+  `estado` tinyint(1) NOT NULL,
+  `idPersona` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Índices para tablas volcadas
 --
@@ -193,22 +241,32 @@ INSERT INTO `usuarios` (`idUsuario`, `usuario`, `contrasena`, `estado`, `idPerso
 -- Indices de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  ADD PRIMARY KEY (`idCategoria`);
+  ADD PRIMARY KEY (`idCategoria`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `colores`
 --
 ALTER TABLE `colores`
-  ADD PRIMARY KEY (`idColor`);
+  ADD PRIMARY KEY (`idColor`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `detalleproductos`
 --
 ALTER TABLE `detalleproductos`
   ADD PRIMARY KEY (`idDetalleProducto`),
+  ADD UNIQUE KEY `nombre` (`nombre`),
   ADD KEY `idTalla` (`idTalla`),
   ADD KEY `idColor` (`idColor`),
   ADD KEY `idProducto` (`idProducto`);
+
+--
+-- Indices de la tabla `entradas`
+--
+ALTER TABLE `entradas`
+  ADD PRIMARY KEY (`idEntrada`),
+  ADD KEY `idDetalleProducto` (`idDetalleProducto`);
 
 --
 -- Indices de la tabla `personas`
@@ -223,19 +281,22 @@ ALTER TABLE `personas`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`idProducto`),
-  ADD UNIQUE KEY `idCategoria` (`idCategoria`);
+  ADD UNIQUE KEY `idCategoria` (`idCategoria`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
-  ADD PRIMARY KEY (`idRol`);
+  ADD PRIMARY KEY (`idRol`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `tallas`
 --
 ALTER TABLE `tallas`
-  ADD PRIMARY KEY (`idTalla`);
+  ADD PRIMARY KEY (`idTalla`),
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -247,6 +308,13 @@ ALTER TABLE `usuarios`
   ADD KEY `idPersona` (`idPersona`);
 
 --
+-- Indices de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD PRIMARY KEY (`idVenta`),
+  ADD KEY `idPersona` (`idPersona`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -254,7 +322,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `colores`
@@ -266,7 +334,13 @@ ALTER TABLE `colores`
 -- AUTO_INCREMENT de la tabla `detalleproductos`
 --
 ALTER TABLE `detalleproductos`
-  MODIFY `idDetalleProducto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDetalleProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `entradas`
+--
+ALTER TABLE `entradas`
+  MODIFY `idEntrada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `personas`
@@ -278,7 +352,7 @@ ALTER TABLE `personas`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -299,6 +373,12 @@ ALTER TABLE `usuarios`
   MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  MODIFY `idVenta` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -309,6 +389,12 @@ ALTER TABLE `detalleproductos`
   ADD CONSTRAINT `detalleproductos_ibfk_1` FOREIGN KEY (`idTalla`) REFERENCES `tallas` (`idTalla`) ON UPDATE CASCADE,
   ADD CONSTRAINT `detalleproductos_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`) ON UPDATE CASCADE,
   ADD CONSTRAINT `detalleproductos_ibfk_3` FOREIGN KEY (`idColor`) REFERENCES `colores` (`idColor`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `entradas`
+--
+ALTER TABLE `entradas`
+  ADD CONSTRAINT `entradas_ibfk_1` FOREIGN KEY (`idDetalleProducto`) REFERENCES `detalleproductos` (`idDetalleProducto`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `productos`
@@ -322,6 +408,12 @@ ALTER TABLE `productos`
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`idPersona`) REFERENCES `personas` (`idPersona`),
   ADD CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`idRol`) REFERENCES `roles` (`idRol`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`idPersona`) REFERENCES `personas` (`idPersona`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

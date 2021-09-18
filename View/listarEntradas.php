@@ -3,8 +3,8 @@
     if (!isset($_SESSION['usuario'])) {
         header('Location:../View/login.php');
     }
-    require_once('../Controller/controladorTallas.php');
-    $listaTallas = $controladorTallas->listarTallas();
+    require_once('../Controller/controladorEntradas.php');
+    $listaEntradas = $controladorEntradas->listarEntradas();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,8 +41,8 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h1>Lista de tallas</h1>
-                                <a href="../Controller/controladorTallas.php?registrarTalla" style="height: 50%;" class="btn btn-dark">Nueva talla</a>
+                                <h1>Lista de entradas</h1>
+                                <a href="../Controller/controladorEntradas.php?registrarEntradas" style="height: 50%;" class="btn btn-dark">Nueva entrada</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -51,18 +51,18 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Nombre</th>
-                                            <th>Opciones</th>
+                                            <th>Nombre producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Fecha</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($listaTallas as $talla){ ?>
+                                        <?php foreach($listaEntradas as $entrada){ ?>
                                             <tr>
-                                                <td><?php echo $talla['idTalla']; ?></td>
-                                                <td><?php echo $talla['nombre']; ?></td>
-                                                <td>
-                                                    <a href="../Controller/controladorTallas.php?editarTalla=<?php echo $talla['idTalla'] ?>" class="btn btn-secondary">Editar</a>
-                                                </td>
+                                                <td><?php echo $entrada['idEntrada']; ?></td>
+                                                <td><?php echo $entrada['nombre']; ?></td>
+                                                <td><?php echo $entrada['cantidad']; ?></td>
+                                                <td><?php echo $entrada['fechaEntrada']; ?></td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>

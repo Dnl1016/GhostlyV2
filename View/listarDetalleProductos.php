@@ -22,6 +22,8 @@
     <link href="../Layout/css/fons.googleapis.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="../Layout/css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="../Lib/css/datatables.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -41,34 +43,41 @@
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
                                 <h1>Detalles producto: <?php echo $producto['nombre'] ?></h1>
-                                <!-- <a href="../Controller/controladorProductos.php?registrarProducto" style="height: 50%;" class="btn btn-dark">Nuevo producto</a> -->
+                                <a href="../Controller/controladorProductos.php?registrarDetalleProducto=<?php echo $_GET['idProducto'] ?>" style="height: 50%;" class="btn btn-dark">Nuevo detalle producto</a>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table id="listarRegistros" style="width:100%" class="table table-hover display">
                                     <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>Nombre</th>
                                             <th>Cantidad</th>
+                                            <th>Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
                                             $contador = 0;
-                                            foreach($listaDetalleProductos as $producto){ 
+                                            foreach($listaDetalleProductos as $detalleProducto){ 
                                             $contador += 1;
                                             ?>
                                             <tr>
                                                 <td><?php echo $contador; ?></td>
-                                                <td><?php echo $producto['nombre']; ?></td>
-                                                <td><?php echo $producto['cantidad']; ?></td>
+                                                <td><?php echo $detalleProducto['nombre']; ?></td>
+                                                <td><?php echo $detalleProducto['cantidad']; ?></td>
+                                                <td>
+                                                    <a href="../Controller/controladorProductos.php?editarDetalleProducto=<?php echo $detalleProducto['idDetalleProducto'] ?>" class="btn btn-secondary">Editar</a>
+                                                </td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="../Controller/controladorProductos.php?listarProductos" class="btn btn-dark col-md-12">Regresar</a>
                         </div>
                     </div>
                 </div>
@@ -93,5 +102,9 @@
     <script src="../Layout/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="../Layout/js/sb-admin-2.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="../Lib/js/datatables.min.js"></script>
+    <script src="js/datatables.js"></script>  
 </body>
 </html>

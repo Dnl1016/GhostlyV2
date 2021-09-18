@@ -22,6 +22,7 @@
     <link href="../Layout/css/fons.googleapis.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="../Layout/css/sb-admin-2.min.css" rel="stylesheet">
+    <?php include('../Layout/plantilla/select2Css.html') ?>
 </head>
 
 <body id="page-top">
@@ -40,7 +41,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h1>Crear producto</h1>
+                                <h1>Editar producto</h1>
                                 <a href="../Controller/controladorProductos.php?listarProductos" style="height: 50%;" class="btn btn-dark">Regresar</a>
                             </div>
                         </div>
@@ -49,17 +50,11 @@
                             <form action="../Controller/controladorProductos.php" method="POST">
                                 <input type="hidden" value="<?php echo $producto['idProducto'] ?>" name="idProducto">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="nombre">Nombre:</label>
                                             <input value="<?php echo $producto['nombre'] ?>" required id="nombre" name="nombre" class="form-control" type="text" placeholder="Nombre...">
                                         </div> 
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="cantidad">Cantidad:</label>
-                                            <input value="<?php echo $producto['cantidad'] ?>" required id="cantidad" name="cantidad" class="form-control" type="text" placeholder="Cantidad...">
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -87,7 +82,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="idCategoria">Categoria:</label>
+                                            <label for="idCategoria">Categoría:</label>
                                             <select required class="form-control" name="idCategoria" id="idCategoria">
                                                 <option value="">Seleccion la categoria</option>
                                                 <?php foreach($listaCategorias as $categoria){ ?>
@@ -130,6 +125,8 @@
     <script src="../Layout/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="../Layout/js/sb-admin-2.min.js"></script>
+
+    <?php include('../Layout/plantilla/select2Js.html') ?>
 
     <?php
         if(isset($_GET['error'])){

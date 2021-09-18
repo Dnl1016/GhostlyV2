@@ -60,9 +60,9 @@
             $Db = ConexionDB::Conectar(); //Conectamos la base de datos
             if($this->validarUsuario($usuario->getUsuario())){
                 return 'El-usuario-ya-esta-registrado.';
-            }elseif($this->validarDocumento($persona->getDocumento())){
+            }elseif($this->validarDocumento($persona->getCedula())){
                 return 'El-documento-ya-esta-registrado.';
-            }elseif($this->validarDocumento($persona->getCorreo())){
+            }elseif($this->validarCorreo($persona->getCorreo())){
                 return 'El-correo-ya-esta-registrado.';
             }
             $idPersona = $this->registrarPersona($persona);
@@ -104,26 +104,6 @@
             return $idPersona;
         }
 
-        /* public function RegistrarClientes($Cliente){
-            $mensaje;
-            $Db = ConexionDB::Conectar(); //Conectamos la base de datos
-            $sql = $Db->prepare('INSERT INTO clientes(Documento, Nombre, Apellido, Celular)
-            VALUES (:Documento, :Nombre, :Apellido, :Celular)');
-            $sql->bindvalue('Documento',$Cliente->getDocumento());
-            $sql->bindvalue('Nombre',$Cliente->getNombre());
-            $sql->bindvalue('Apellido',$Cliente->getApellido());
-            $sql->bindvalue('Celular',$Cliente->getCelular()); //Asignamos los valores al value
-            
-            try {
-                $sql->execute(); //Ejecutamos la consulta
-                $mensaje = "Registro exitoso";
-            } catch (Exception $e) {
-                $mensaje = $e.getMessage();
-            }
-            ConexionDB::CerrarConexion($Db); //Cerramos conexion a la DB
-            return $mensaje;
-        }
-        */
         public function buscarUsuario($idUsuario){
             $Db = ConexionDB::Conectar(); //Establecemos conexion
             $sql = $Db->prepare('SELECT p.idPersona, p.direccion, p.nombre, p.apellido, p.correo, p.cedula, p.telefono, u.usuario, u.estado, r.idRol FROM roles r inner join usuarios u ON r.idRol=u.idRol
@@ -184,21 +164,5 @@
             ConexionDB::CerrarConexion($Db);
             return $mensaje;
         }
-        /*
-        public function EliminarClientes($Documento){
-            $mensaje = "";
-            $Db = ConexionDB::Conectar();
-            $sql = $Db->prepare('DELETE FROM clientes
-            WHERE Documento=:Documento1');
-            $sql->bindvalue('Documento1',$Documento);
-            try{
-                $sql->execute();
-                $mensaje = "Eliminación exitosa";
-            }catch(Exception $e){
-                $mensaje = $e.getMessage();
-            }
-            ConexionDB::CerrarConexion($Db);
-            return $mensaje;
-        } */
     }
 ?>
