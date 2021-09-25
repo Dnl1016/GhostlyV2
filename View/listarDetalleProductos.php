@@ -54,6 +54,7 @@
                                             <th>#</th>
                                             <th>Nombre</th>
                                             <th>Cantidad</th>
+                                            <th>Precio unitario</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
@@ -67,6 +68,7 @@
                                                 <td><?php echo $contador; ?></td>
                                                 <td><?php echo $detalleProducto['nombre']; ?></td>
                                                 <td><?php echo $detalleProducto['cantidad']; ?></td>
+                                                <td><?php echo $detalleProducto['precio']; ?></td>
                                                 <td>
                                                     <a href="../Controller/controladorProductos.php?editarDetalleProducto=<?php echo $detalleProducto['idDetalleProducto'] ?>" class="btn btn-secondary">Editar</a>
                                                 </td>

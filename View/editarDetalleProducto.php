@@ -44,7 +44,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h1>Crear detalle productos</h1>
+                                <h1>Editar detalle productos</h1>
                                 <a href="../Controller/controladorProductos.php?producto=<?php echo $detalleProducto['idProducto'] ?>" style="height: 50%;" class="btn btn-dark">Regresar</a>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="idTalla">Talla:</label>
                                                             <select name="idTalla" required class="form-control" id="idTalla">
@@ -77,7 +77,7 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">  
+                                                    <div class="col-md-4">  
                                                         <div class="form-group">
                                                             <label for="idColor">Color:</label>
                                                             <select name="idColor" required class="form-control" id="idColor">
@@ -87,6 +87,12 @@
                                                                 <?php } ?>
                                                             </select>
                                                         </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="precio">Precio unitario:</label>
+                                                            <input name="precio" required id="precio" class="form-control" type="text" placeholder="precio ..." value="<?php echo $detalleProducto['precio'] ?>">
+                                                        </div> 
                                                     </div>
                                                 </div>
                                             </div>

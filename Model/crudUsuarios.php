@@ -31,10 +31,10 @@
             return false;
         }
 
-        private function validarDocumento($documento){
+        private function validarDocumento($cedula){
             $db = ConexionDB::Conectar(); //Conectamos con la base de datos
-            $sql = $db->prepare("SELECT * FROM personas WHERE documento=:documento");//Consultamos la base de datos
-            $sql->bindValue('documento', $documento);
+            $sql = $db->prepare("SELECT * FROM personas WHERE cedula=:cedula");//Consultamos la base de datos
+            $sql->bindValue('cedula', $cedula);
             $sql->execute();
             ConexionDB::CerrarConexion($Db);
             if($sql->rowCount() > 0){

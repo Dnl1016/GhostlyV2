@@ -70,8 +70,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="cedula">Cedula:</label>
-                                            <input required id="cedula" name="cedula" class="form-control" type="text" placeholder="Cedula...">
+                                            <label for="cedula">Documento:</label>
+                                            <input required id="cedula" name="cedula" class="form-control" type="text" placeholder="Documento...">
                                         </div>
                                     </div>
                                 </div>

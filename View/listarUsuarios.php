@@ -54,7 +54,7 @@
                                             <th>#</th>
                                             <th>Nombre</th>
                                             <th>Apellido</th>
-                                            <th>Cedula</th>
+                                            <th>Documento</th>
                                             <th>Correo</th>
                                             <th>Teléfono</th>
                                             <th>Usuario</th>

@@ -48,7 +48,7 @@
                         </div>
                         <div class="card-body">
                             <div id="error"></div>
-                            <form action="../Controller/controladorProductos.php" method="POST">
+                            <form action="../Controller/controladorProductos.php" method="POST" enctype="multipart/form-data"/>
                                 <input type="hidden" name="idProducto" value="<?php echo $_GET['idProducto'] ?>">
                                 <div class="card">
                                     <div class="card-body">
@@ -63,7 +63,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="idTalla">Talla:</label>
                                                             <select required class="form-control" id="idTalla">
@@ -74,7 +74,7 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">  
+                                                    <div class="col-md-4">  
                                                         <div class="form-group">
                                                             <label for="idColor">Color:</label>
                                                             <select required class="form-control" id="idColor">
@@ -85,8 +85,21 @@
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="precio">Precio unitario:</label>
+                                                            <input required  class="form-control"  name= "precio" id="precio" type="text" placeholder="Precio...">
+                                                        </div> 
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            Añadir imagen: <input name="archivo" id="archivo" type="file"/>
+                                                            <input type="submit" name="subir" value="Subir imagen"/>
+                                                        </div> 
+                                                    </div>
                                                 </div>
                                             </div>
+                                            
                                             <div class="card-footer">
                                                 <button type="button" class="btn btn-dark col-md-12" id="agregarDetalleProducto"><i class="fas fa-plus"></i></button>
                                             </div>
@@ -103,6 +116,7 @@
                                                                 <th>Nombre</th>
                                                                 <th>Talla</th>
                                                                 <th>Color</th>
+                                                                <th>precio unitario</th>
                                                                 <th>Opciones</th>
                                                             </tr>
                                                         </thead>

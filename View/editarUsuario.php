@@ -75,7 +75,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="cedula">Cedula:</label>
+                                            <label for="cedula">Documento:</label>
                                             <input value="<?php echo $usuario['cedula'] ?>" required id="cedula" name="cedula" class="form-control" type="text" placeholder="Cedula...">
                                         </div>
                                     </div>

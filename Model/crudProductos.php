@@ -88,7 +88,7 @@
             return $sql->fetchAll();
         }
 
-        public function registrarDetalleProducto($idProducto, $nombre, $idTalla, $idColor){
+        public function registrarDetalleProducto($idProducto, $nombre, $precio, $idTalla, $idColor){
             $db = ConexionDB::Conectar();
             $mensaje = "";
             try {
@@ -97,10 +97,11 @@
                     $imagenUno = "ImagenUno_".$value;
                     $imagenDos = "ImagenDos_".$value;
                     $imagenTres = "ImagenTres_".$value;
-                    $sql = $db->prepare("INSERT INTO detalleproductos(nombre, cantidad, imagenUno, imagenDos, imagenTres, idTalla, idColor, idProducto)
-                        VALUE (:nombre, :cantidad, :imagenUno, :imagenDos, :imagenTres, :idTalla, :idColor, :idProducto)");
+                    $sql = $db->prepare("INSERT INTO detalleproductos(nombre, cantidad, precio, imagenUno, imagenDos, imagenTres, idTalla, idColor, idProducto)
+                        VALUE (:nombre, :cantidad, :precio, :imagenUno, :imagenDos, :imagenTres, :idTalla, :idColor, :idProducto)");
                     $sql->bindValue('nombre', $value);
                     $sql->bindValue('cantidad', 0);
+                    $sql->bindValue('precio', $precio);
                     $sql->bindValue('imagenUno', $imagenUno);
                     $sql->bindValue('imagenDos', $imagenDos);
                     $sql->bindValue('imagenTres', $imagenTres);
@@ -119,12 +120,13 @@
             return $mensaje;
         }
 
-        public function editarDetalleProducto($idDetalleProducto, $nombre, $idTalla, $idColor){
+        public function editarDetalleProducto($idDetalleProducto, $nombre, $precio, $idTalla, $idColor){
             $db = ConexionDB::Conectar();
             $mensaje = "";
             try {
-                $sql = $db->prepare("UPDATE detalleproductos SET nombre=:nombre, idTalla=:idTalla, idColor=:idColor WHERE idDetalleProducto=:idDetalleProducto");
+                $sql = $db->prepare("UPDATE detalleproductos SET nombre=:nombre, precio=:precio, idTalla=:idTalla, idColor=:idColor WHERE idDetalleProducto=:idDetalleProducto");
                 $sql->bindValue('nombre', $nombre);
+                $sql->bindValue('precio', $precio);
                 $sql->bindValue('idTalla', $idTalla);
                 $sql->bindValue('idColor', $idColor);
                 $sql->bindValue('idDetalleProducto', $idDetalleProducto);

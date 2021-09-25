@@ -1,3 +1,6 @@
+<?php
+require_once('../Controller/controladorRegistro.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
