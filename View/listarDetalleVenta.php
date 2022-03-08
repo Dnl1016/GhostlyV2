@@ -43,7 +43,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h1>Detalles venta: <?php echo $venta ['idVenta'] ?></h1>
+                                <h1>Detalles venta: <?php echo $venta ['nombre'] ?></h1>
                             </div>
                         </div>
                         <div class="card-body">
