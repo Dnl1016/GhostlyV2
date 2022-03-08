@@ -52,8 +52,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Nombre Venta</th>
-                                            <th>producto</th>
+                                            <th>Nombre producto</th>
                                             <th>Cantidad</th>
                                             <th>Precio unitario</th>
                                         </tr>
@@ -66,7 +65,6 @@
                                             ?>
                                             <tr>   
                                                 <td><?php echo $contador; ?></td>
-                                                <td><?php echo $detalleVenta['nombre']; ?></td>
                                                 <td><?php echo $detalleVenta['nombre']; ?></td>
                                                 <td><?php echo $detalleVenta['cantidad']; ?></td>
                                                 <td><?php echo $detalleVenta['precio']; ?></td>

@@ -102,8 +102,7 @@
 
         public function buscarDetalleVenta($idDetalleVenta){
             $db = ConexionDB::Conectar();
-            $sql = $db->prepare('SELECT * FROM detalleVenta dv inner join ventas v on dv.idVenta=v.idVenta 
-             WHERE dv.idDetalleVenta=:idDetalleVenta');
+            $sql = $db->prepare('SELECT * FROM detalleVenta dv inner join ventas v on dv.idVenta=v.idVenta  WHERE dv.idDetalleVenta=:idDetalleVenta');
             $sql->bindValue('idDetalleVenta', $idDetalleVenta);
             $sql->execute();
             ConexionDB::CerrarConexion($db);
@@ -112,7 +111,10 @@
 
         public function detalleVenta($idVenta){
             $db = ConexionDB::Conectar();
-            $sql = $db->prepare('SELECT * FROM detalleVenta dv inner join ventas v on dv.idVenta=v.idVenta WHERE dv.idVenta=:idVenta');
+            $sql = $db->prepare('SELECT  dp.nombre, dv.cantidad, dv.precio FROM detalleVenta dv 
+            inner join ventas v on dv.idVenta=v.idVenta
+            inner join detalleProductos dp on dp.idDetalleProducto=dv.idDetalleProducto
+             WHERE dv.idVenta=:idVenta');
             $sql->bindValue('idVenta', $idVenta);
             $sql->execute();
             ConexionDB::CerrarConexion($db);
