@@ -31,6 +31,16 @@
             return $crudVentas->registrarVenta($idPersona, $nombreVenta, $detalleIdProducto, $detalleCantidad, $detallePrecioUnitario);
         }
 
+        public function buscarDetalleVenta ($idDetalleVenta){
+            $crudVentas = new crudVentas();
+            return $crudVentas->buscarDetalleVenta($idDetalleVenta);
+        }
+
+        public function DetalleVenta($idVenta){
+            $crudVentas = new crudVentas();
+            return $crudVentas->detalleVenta($idVenta);
+        }
+
     }
 
     $controladorVentas = new controladorVentas();
@@ -58,5 +68,8 @@
                 }
             }
         }
+    }
+    if(isset($_GET['venta'])){
+        header('Location:../View/listarDetalleVenta.php?idVenta='.$_GET['venta']);
     }
 ?>

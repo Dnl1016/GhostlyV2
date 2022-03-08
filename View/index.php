@@ -35,10 +35,72 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+                    <h1 class="h3 mb-4 text-gray-800">¿Necesitas ayuda?</h1>
                 </div>
+                <div class="container">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                            <div class="card-header" id="headinguno">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseuno" aria-expanded="true" aria-controls="collapseuno">
+                                CONFIGURACIÓN
+                                </button>
+                            </h2>
+                            </div>
+
+                            <div id="collapseuno" class="collapse show" aria-labelledby="headinguno" data-parent="#accordionExample">
+                            <div class="card-body">
+                            Este módulo permite gestionar toda la información listada a la cuenta de los roles y permisos del aplicativo.<A HREF="https://www.youtube.com/"> Video de confifuracion</A> 
+                            </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingdos">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapsedos" aria-expanded="false" aria-controls="collapsedos">
+                                PRODUCTOS
+                                </button>
+                            </h2>
+                            </div>
+                            <div id="collapsedos" class="collapse" aria-labelledby="headingdos" data-parent="#accordionExample">
+                            <div class="card-body">
+                                Este módulo permite gestionar toda la información de los productos, categorías,  entradas, tallas y color. <A HREF="https://www.youtube.com/"> Video de productos</A>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingtres">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapsetres" aria-expanded="false" aria-controls="collapsetres">
+                               USUARIOS
+                                </button>
+                            </h2>
+                            </div>
+                            <div id="collapsetres" class="collapse" aria-labelledby="headingtres" data-parent="#accordionExample">
+                            <div class="card-body">
+                                Este módulo permite gestionar toda la información listada a la cuenta de los usuarios y sus datos personales, además de  la seguridad del aplicativo. <A HREF="https://www.youtube.com/"> Video de usuarios</A>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingcuatro">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapsecuatro" aria-expanded="false" aria-controls="collapsecuatro">
+                                VENTA
+                                </button>
+                            </h2>
+                            </div>
+                            <div id="collapsecuatro" class="collapse" aria-labelledby="headingcuatro" data-parent="#accordionExample">
+                            <div class="card-body">
+                                Este módulo permite gestionar toda la información listada a la cuenta de las ventas que realizan los clientes. <A HREF="https://www.youtube.com/"> Video de ventas</A>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+
                 <!-- /.container-fluid -->
             </div>
+                
             <!-- End of Main Content -->
             <!-- Footer -->
             <?php include('../Layout/plantilla/footer.php'); ?>

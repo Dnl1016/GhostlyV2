@@ -99,5 +99,23 @@
             $fecha = date('Y-m-d h:m:s');
             return $fecha;
         }
+
+        public function buscarDetalleVenta($idDetalleVenta){
+            $db = ConexionDB::Conectar();
+            $sql = $db->prepare("SELECT * FROM detalleVenta WHERE idDetalleVenta=:idDetalleVenta");
+            $sql->bindValue('idDetalleVenta', $idDetalleVenta);
+            $sql->execute();
+            ConexionDB::CerrarConexion($db);
+            return $sql->fetch();
+        }
+
+        public function detalleVenta($idVenta){
+            $db = ConexionDB::Conectar();
+            $sql = $db->prepare("SELECT * FROM detalleVenta WHERE idVenta=:idVenta");
+            $sql->bindValue('idVenta', $idVenta);
+            $sql->execute();
+            ConexionDB::CerrarConexion($db);
+            return $sql->fetchAll();
+        }
     }
 ?>

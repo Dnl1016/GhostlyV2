@@ -4,7 +4,9 @@
         header('Location:../View/login.php');
     }
     require_once('../Controller/controladorVentas.php');
-    $listarVentas = $controladorVentas->listarVentas();
+    $listaDetalleVentas = $controladorVentas->detalleVenta($_GET['idVenta']);
+    $venta = $controladorVentas->buscarDetalleVenta($_GET['idVenta']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,9 +43,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h1>Lista de ventas</h1>
-                                <a href="../Controller/controladorVentas.php?registrarVentas" style="height: 50%;" class="btn btn-dark">Nueva venta</a>
-                                <a href="reporteVenta.php" style="height: 50%;" class="btn btn-dark"> Reporte</a>
+                                <h1>Detalles venta: <?php echo $venta ['idVenta'] ?></h1>
                             </div>
                         </div>
                         <div class="card-body">
@@ -52,31 +52,32 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Nombre</th>
-                                            <th>Fecha venta</th>
-                                            <th>Valor</th>
-                                            <th>Estado</th>
-                                            <th>Persona</th>
-                                            <th>Opciones</th>
+                                            <th>Nombre Venta</th>
+                                            <th>producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio unitario</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($listarVentas as $venta){ ?>
-                                            <tr>
-                                                <td><?php echo $venta['idVenta']; ?></td>
-                                                <td><?php echo $venta['nombre']; ?></td>
-                                                <td><?php echo $venta['fechaVenta']; ?></td>
-                                                <td><?php echo $venta['valor']; ?></td>
-                                                <td><?php echo $venta['estado'] == 0 ? 'Registrada' : ($venta['estado'] == 1 ? 'Aprobada' : 'Anulada'); ?></td>
-                                                <td><?php echo $venta['idPersona']; ?></td>
-                                                <td>
-                                                    <a href="../Controller/controladorVentas.php?venta=<?php echo $venta['idVenta'] ?>" class="btn btn-dark">Ver mas</a>
-                                                </td>
+                                        <?php 
+                                            $contador = 0;
+                                            foreach($listaDetalleVentas as $detalleVenta){ 
+                                            $contador += 1;
+                                            ?>
+                                            <tr>   
+                                                <td><?php echo $contador; ?></td>
+                                                <td><?php echo $detalleVenta['nombre']; ?></td>
+                                                <td><?php echo $detalleVenta['nombre']; ?></td>
+                                                <td><?php echo $detalleVenta['cantidad']; ?></td>
+                                                <td><?php echo $detalleVenta['precio']; ?></td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="../Controller/controladorVentas.php?listarVentas" class="btn btn-dark col-md-12">Regresar</a>
                         </div>
                     </div>
                 </div>
